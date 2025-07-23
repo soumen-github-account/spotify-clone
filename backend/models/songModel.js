@@ -6,6 +6,8 @@ const songSchema = new mongoose.Schema({
     album: {type: String, required: true},
     image: {type: String, required: true},
     file: {type: String, required: true},
+    artist: {type: String, required:true},
+    tags: { type: [String], default: [] },
     duration: {type: String, required: true}
 });
 

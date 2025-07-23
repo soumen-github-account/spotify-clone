@@ -3,8 +3,15 @@ import { assets } from '../assets/assets'
 import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { RxCrossCircled } from "react-icons/rx";
+import { singerData } from '../../../frontend/src/assets/assets'
 
+// export const url = 'http://localhost:8000'
 export const url = 'https://spotify-server-eight.vercel.app'
+
+const tags = [
+  "Todey's biggest hit",'Popular albums and singles', 'Recomendet for Today','Sad hindi songs Mood off 💔'
+]
 
 const AddSongs = () => {
 
@@ -14,6 +21,10 @@ const AddSongs = () => {
     const [desc, setDesc] = useState("")
     const [album, setAlbum] = useState("none")
     const [loading, setLoading] = useState(false)
+    const [singer, setSinger] = useState('');
+
+    const [selectedTags, setSelectedTags] = useState([]);
+
     const [albumData, setAlbumData] = useState([])
 
     const onSubmitHandler = async(e)=>{
@@ -27,12 +38,15 @@ const AddSongs = () => {
             formData.append('image', image);
             formData.append('audio', song);
             formData.append('album', album);
+            formData.append('tags', JSON.stringify(selectedTags));
+            formData.append('artist', singer)
 
-            const response = await axios.post(`${url}/api/song/add`, formData)
+            const response = await axios.post(`${url}/api/song/add`, formData, {headers: {
+              'Content-Type': 'multipart/form-data'
+            }})
             if(response.data.success){
                 toast.success("Song Added");
                 console.log(response.data.message)
-
             } else{
                 toast.error(response.data.message)
                 console.log(response.data.message)
@@ -60,6 +74,17 @@ const AddSongs = () => {
       setLoading(false)
     }
   }
+
+  const handleTagClick = (tag) => {
+    if (!selectedTags.includes(tag)) {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+
+  const handleRemoveTag = (tag) => {
+    setSelectedTags(selectedTags.filter(t => t !== tag));
+  };
+
 
   useEffect(()=>{
       fetchAlbums()
@@ -97,6 +122,47 @@ const AddSongs = () => {
         <p>Song description</p>
         <input onChange={(e)=>setDesc(e.target.value)} value={desc} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[70vw]' placeholder='Type Here' type="text" />
       </div>
+
+      <h1>Add Tags</h1>
+      <div className='flex flex-wrap gap-5'>
+      {
+        tags.map((tag, index) => {
+          const isSelected = selectedTags.includes(tag);
+          return (
+            <div 
+              key={index}
+              onClick={() => !isSelected && handleTagClick(tag)}
+              className={`border flex items-center gap-2 px-4 py-1.5 rounded-full cursor-pointer transition-all 
+                ${isSelected ? 'bg-green-100 border-green-600' : 'border-gray-500'}
+              `}
+            >
+              <span>{tag}</span>
+              {isSelected && (
+                <RxCrossCircled
+                  className='text-red-500'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveTag(tag);
+                  }}
+                />
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+
+      <h1>Choose Singer</h1>
+    <div className='flex flex-wrap gap-4'>
+      {
+        singerData.map((item, index)=>(
+          <div onClick={()=>setSinger(item.id)} key={index} className={`cursor-pointer rounded-md p-2 ${singer===item.id ? 'bg-green-100 border border-green-600' : ''}`}>
+            <img src={item.image} className='md:w-30 w-20 rounded-full' alt="" />
+            <p className='text-center'>{item.name}</p>
+          </div>
+        ))
+      }
+    </div>
 
       <div className='flex flex-col gap-2.5'>
         <p>Album</p>

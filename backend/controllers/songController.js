@@ -7,6 +7,11 @@ export const addSong = async(req, res)=>{
         const name = req.body.name;
         const desc = req.body.desc;
         const album = req.body.album;
+        const artist = req.body.artist;
+        const tags = req.body.tags ? JSON.parse(req.body.tags) : [];
+        if(!Array.isArray(tags) || tags.length === 0){
+            return res.json({success: false, message:"tags required"})
+        }
 
         const imageFile = req.files.image[0];
         const audioFile = req.files.audio[0];
@@ -21,6 +26,8 @@ export const addSong = async(req, res)=>{
             album,
             image: imageUpload.secure_url,
             file: audioUpload.secure_url,
+            artist,
+            tags,
             duration
         }
 

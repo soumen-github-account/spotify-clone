@@ -66,7 +66,6 @@ const AddAlbum = () => {
             <p>Album description</p>
             <input onChange={(e)=>setDesc(e.target.value)} value={desc} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[70vw] ' placeholder='Type Here' type="text" />
           </div>
-
         <div className='flex flex-col gap-3'>
             <p>Background Colour</p>
             <input onChange={(e)=>setColour(e.target.value)} value={colour} type="color" />

@@ -42,6 +42,20 @@ import song1 from  './song1.mp3'
 import song2 from  './song2.mp3'
 import song3 from  './song3.mp3'
 
+
+import s1 from './s1.jpg'
+import s2 from './s2.jpg'
+import s3 from './s3.jpg'
+import s4 from './s4.jpg'
+import s5 from './s5.jpg'
+import s6 from './s6.jpg'
+import s7 from './s7.jpg'
+import s8 from './s8.jpg'
+import s9 from './s9.jpg'
+import s10 from './s10.jpg'
+import s11 from './s11.jpg'
+import s12 from './s12.jpg'
+
 export const assets = {
     bell_icon,
     home_icon,
@@ -180,3 +194,91 @@ export const songsData = [
         duration:"2:35"
     }
 ]
+
+
+export const singerData = [
+  {
+    id: "1",
+    name: "Pritam",
+    image: s1,
+    bgColour: "#57564F",
+    description: "Pritam is a celebrated Indian music director known for his versatile and chart-topping Bollywood compositions."
+  },
+  {
+    id: "2",
+    name: "A.R Rahman",
+    image: s2,
+    bgColour: "#58A0C8",
+    description: "A.R. Rahman is an Oscar-winning composer renowned for blending classical music with electronic beats and world sounds."
+  },
+  {
+    id: "3",
+    name: "Arijit Singh",
+    image: s3,
+    bgColour: "#EB5B00",
+    description: "Arijit Singh is one of India's most beloved playback singers, known for his soulful voice and romantic ballads."
+  },
+  {
+    id: "4",
+    name: "Sachin-Jigar",
+    image: s4,
+    bgColour: "#4A9782",
+    description: "Sachin-Jigar is a music composer duo known for their catchy and youthful Bollywood tracks."
+  },
+  {
+    id: "5",
+    name: "Vishal Shekar",
+    image: s5,
+    bgColour: "#BA487F",
+    description: "Vishal-Shekhar are a dynamic music duo behind many hit soundtracks in contemporary Bollywood cinema."
+  },
+  {
+    id: "6",
+    name: "Atif Aslam",
+    image: s6,
+    bgColour: "#347433",
+    description: "Atif Aslam is a Pakistani singer admired for his powerful vocals and successful Bollywood songs."
+  },
+  {
+    id: "7",
+    name: "Aniruddha Ravichander",
+    image: s7,
+    bgColour: "#901E3E",
+    description: "Anirudh is a South Indian composer and singer famous for his fresh sound and Tamil chartbusters."
+  },
+  {
+    id: "8",
+    name: "Udit Narayan",
+    image: s8,
+    bgColour: "#B33791",
+    description: "Udit Narayan is a legendary playback singer known for his evergreen hits during the 90s and early 2000s."
+  },
+  {
+    id: "9",
+    name: "Yo Yo Honey Singh",
+    image: s9,
+    bgColour: "#D5451B",
+    description: "Yo Yo Honey Singh is a rapper and music producer known for revolutionizing Indian pop and party music."
+  },
+  {
+    id: "10",
+    name: "Shreya Ghosal",
+    image: s10,
+    bgColour: "#FF0B55",
+    description: "Shreya Ghoshal is a versatile and acclaimed playback singer with a melodious voice and classical roots."
+  },
+  {
+    id: "11",
+    name: "Amit Trevedi",
+    image: s11,
+    bgColour: "#1DCD9F",
+    description: "Amit Trivedi is known for his experimental style and emotionally rich soundtracks in Indian cinema."
+  },
+  {
+    id: "12",
+    name: "Sachet Parampara",
+    image: s12,
+    bgColour: "#4F1C51",
+    description: "Sachet–Parampara are a musical duo best known for romantic and devotional songs in modern Bollywood."
+  }
+];
