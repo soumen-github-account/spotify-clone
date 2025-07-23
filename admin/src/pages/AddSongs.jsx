@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-export const url = 'https://spotify-server-eight.vercel.app/'
+export const url = 'https://spotify-server-eight.vercel.app'
 
 const AddSongs = () => {
 
