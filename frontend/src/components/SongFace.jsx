@@ -5,6 +5,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { PlayContext } from '../contexts/PlayerContext';
 import { assets } from '../assets/assets';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 
 const SongFace = () => {
@@ -13,6 +14,7 @@ const SongFace = () => {
   
   const [isDragging, setIsDragging] = useState(false);
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate()
   
   const formatTime = (minute, second) =>
     `${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
@@ -109,9 +111,9 @@ const SongFace = () => {
       damping: 15,
       delay: 0 // ⏱️ Delay before slide animation starts
     }}
-    className='text-white w-[100%] lg:w-[75%] min-h-screen bg-gradient-to-t from-black to-blue-950 top-0 max-sm:left-0 fixed flex flex-col'>
+    className='text-white w-[100%] lg:w-[75%] z-50 min-h-screen bg-gradient-to-t from-black to-blue-950 top-0 max-sm:left-0 fixed flex flex-col'>
       <div className='flex items-center text-[40px] justify-between px-5 mt-4'>
-        <IoIosArrowDown onClick={()=>setOpenSong(false)} className='cursor-pointer hover:bg-gray-700 rounded-full p-2' />
+        <IoIosArrowDown onClick={()=>navigate(-1)} className='cursor-pointer hover:bg-gray-700 rounded-full p-2' />
         <HiOutlineDotsVertical className='cursor-pointer hover:bg-gray-700 rounded-full p-2' />
       </div>
       <div className='flex flex-col mt-10 px-3'>

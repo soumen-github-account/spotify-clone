@@ -5,8 +5,10 @@ import DisplayAlbum from './DisplayAlbum'
 import { PlayContext } from '../contexts/PlayerContext'
 import SingersAlbum from './SingersAlbum'
 import { singerData } from '../assets/assets'
+import SongFace from './SongFace'
 const Display = () => {
   const {albumsData} = useContext(PlayContext)
+  const scrollPositions = useRef({})
 
   const displayRef = useRef()
   const location = useLocation()
@@ -33,6 +35,24 @@ const Display = () => {
       displayRef.current.style.background = '#121212'
     }
   })
+
+  // Save scroll before route change
+  useEffect(() => {
+    return () => {
+      if (displayRef.current) {
+        scrollPositions.current[location.pathname] = displayRef.current.scrollTop
+      }
+    }
+  }, [location.pathname])
+
+  //Restore scroll on route change
+  useEffect(() => {
+    const savedScroll = scrollPositions.current[location.pathname]
+    if (displayRef.current && savedScroll !== undefined) {
+      displayRef.current.scrollTop = savedScroll
+    }
+  }, [location.pathname])
+
   return (
     <div ref={displayRef} className='w-[100%] m-2 px-2 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:ml-0'>
       {albumsData.length > 0
@@ -41,6 +61,7 @@ const Display = () => {
         <Route path='/' element={<DisplayHome />} />
         <Route path='/album/:id' element={<DisplayAlbum album={albumsData.find((x) => (x._id == albumId))} />} />
         <Route path='/singerAlbum/:id' element={<SingersAlbum />} />
+        <Route path='/songFace' element={<SongFace />} />
       </Routes>
       : null
       }

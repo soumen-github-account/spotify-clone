@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { PlayContext } from '../contexts/PlayerContext'
+import { useNavigate } from 'react-router-dom'
 const Player = () => {
+  const navigate = useNavigate()
   const { seekBar,seekBg,playStatus, play,pause,track,time,previous,next,seekSong, openSong, setOpenSong } = useContext(PlayContext)
   const formatTime = (minute, second) =>
     `${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
 
-  return track && !openSong ? (
+  return track ? (
     <div className='h-[4rem] bg-black flex fixed bottom-1 left-0 w-full px-2 z-10 items-center'>
       <div className='lg:flex items-center gap-x-4'>
-        <img onClick={()=>setOpenSong(true)} className='w-12 cursor-pointer' src={track.image} alt="" />
+        <img onClick={()=>{setOpenSong(true); navigate('/songFace')}} className='w-12 cursor-pointer' src={track.image} alt="" />
         <div className='text-white hidden lg:block'>
             <p>{track.name}</p>
             <p>{track.desc.slice(0,12)}</p>

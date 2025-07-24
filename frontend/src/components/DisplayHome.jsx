@@ -34,7 +34,7 @@ const DisplayHome = () => {
             <h1 className='my-5 font-bold text-2xl'>Popular artists</h1>
             <div className='flex overflow-auto'>
                 {singerData.map((item,index)=>(
-                    <div key={index} onClick={()=>navigate(`/singerAlbum/${item.id}`)} className='min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26]'>
+                    <div key={index} onClick={()=>{navigate(`/singerAlbum/${item.id}`); scrollTo(0,0)}} className='min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26]'>
                         <img className='rounded-full' src={item.image} alt="" />
                         <p className='font-bold mt-2 mb-1'>{item.name}</p>
                     </div>
@@ -43,9 +43,9 @@ const DisplayHome = () => {
         </div>
 
         <AppDownload />
-        <AnimatePresence>
+        {/* <AnimatePresence>
             {openSong && <SongFace />}
-        </AnimatePresence>  
+        </AnimatePresence> */}
     </div>
   )
 }
