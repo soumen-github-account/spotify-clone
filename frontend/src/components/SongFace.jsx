@@ -58,6 +58,36 @@ const SongFace = () => {
     updateAudioProgress(newProgress);
   };
 
+  
+
+  const handleTouchStart = () => {
+    setIsDragging(true);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const newProgress = getProgressFromClientX(touch.clientX);
+      setProgress(newProgress);
+      updateAudioProgress(newProgress);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (e.changedTouches.length > 0) {
+      const touch = e.changedTouches[0];
+      const newProgress = getProgressFromClientX(touch.clientX);
+      setProgress(newProgress);
+      updateAudioProgress(newProgress);
+    }
+    setIsDragging(false);
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+  };
+
+
   // Update progress bar from time
   useEffect(() => {
     if (!isDragging && audioRef.current?.duration) {
@@ -121,6 +151,9 @@ const SongFace = () => {
           className="absolute w-4 h-4 bg-white rounded-full -top-1.5 shadow-md"
           style={{ left: `calc(${progress}% - 8px)` }}
           onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
         ></div>
       </div>
 
