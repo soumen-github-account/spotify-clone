@@ -1,9 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
+// Global listener to capture beforeinstallprompt early
+if (typeof window !== 'undefined') {
+  window.deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+    console.log('beforeinstallprompt event saved');
+  });
+}
+
 const Navbar = () => {
   const navigate = useNavigate()
+  const [showInstallButton, setShowInstallButton] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
+  
+  useEffect(() => {
+  const checkInstalled = () => {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    setIsInstalled(isStandalone);
+  };
+  
+  checkInstalled();
+  
+  const handleAppInstalled = () => {
+    console.log('App installed');
+    setIsInstalled(true);
+    window.deferredPrompt = null;
+    setShowInstallButton(false);
+  };
+
+  window.addEventListener('appinstalled', handleAppInstalled);
+
+  // Check if the install prompt is already saved
+  if (window.deferredPrompt && !isInstalled) {
+    setShowInstallButton(true);
+  }
+
+  return () => {
+    window.removeEventListener('appinstalled', handleAppInstalled);
+  };
+}, [isInstalled]);
+
+const handleInstallClick = () => {
+  const promptEvent = window.deferredPrompt;
+  if (!promptEvent) return;
+
+  promptEvent.prompt();
+
+  promptEvent.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+    window.deferredPrompt = null;
+    setShowInstallButton(false);
+  });
+};
+
   return (
     <>
       <div className='w-full flex justify-between items-center font-semibold'>
@@ -13,8 +73,8 @@ const Navbar = () => {
         </div>
         <div className='flex items-center gap-4'>
             <p className='bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer'>Explore premium</p>
-            <p className='bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer'>Install App</p>
-            <p className='bg-purple-500 text-black w-7 rounded-full flex items-center justify-center'>D</p>
+            {!isInstalled && showInstallButton && (<p onClick={handleInstallClick} className='bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer'>Install App</p>)}
+            <p className='bg-purple-500 text-white w-7 h-7 rounded-full flex items-center justify-center'>S</p>
         </div>
       </div>
       <div className='flex items-center gap-2 mt-4'>

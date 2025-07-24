@@ -10,7 +10,7 @@ if (typeof window !== 'undefined') {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     window.deferredPrompt = e;
-    console.log('✅ beforeinstallprompt event saved');
+    console.log('beforeinstallprompt event saved');
   });
 }
 
@@ -29,7 +29,7 @@ const AppDownload = () => {
     checkInstalled();
 
     const handleAppInstalled = () => {
-      console.log('✅ App installed');
+      console.log('App installed');
       setIsInstalled(true);
       window.deferredPrompt = null;
       setShowInstallButton(false);
@@ -55,9 +55,9 @@ const AppDownload = () => {
 
     promptEvent.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
-        console.log('🟢 User accepted the install prompt');
+        console.log('User accepted the install prompt');
       } else {
-        console.log('🟡 User dismissed the install prompt');
+        console.log('User dismissed the install prompt');
       }
       window.deferredPrompt = null;
       setShowInstallButton(false);
