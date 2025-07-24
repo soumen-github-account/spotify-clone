@@ -6,6 +6,7 @@ import SongIcon from './SongIcon'
 import { PlayContext } from '../contexts/PlayerContext'
 import { singerData } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
+import AppDownload from './AppDownload'
 
 const DisplayHome = () => {
     const {songsData, albumsData} = useContext(PlayContext)
@@ -26,33 +27,6 @@ const DisplayHome = () => {
         <SongIcon tag="Recomendet for Today" />
         <SongIcon tag="Sad hindi songs Mood off 💔" />
         
-        {/* <div className='mb-4'>
-            <h1 className='my-5 font-bold text-2xl'>Todey's biggest hits</h1>
-            <div className='flex overflow-auto'>
-                {songsData.map((item,index)=>(<SongIcon key={index} name={item.name} desc={item.desc} id={item._id} image={item.image} />))}
-            </div>
-        </div>
-
-        <div className='mb-4'>
-            <h1 className='my-5 font-bold text-2xl'>Popular albums and singles</h1>
-            <div className='flex overflow-auto'>
-                {songsData.map((item,index)=>(<SongIcon key={index} name={item.name} desc={item.desc} id={item._id} image={item.image} />))}
-            </div>
-        </div>
-
-        <div className='mb-4'>
-            <h1 className='my-5 font-bold text-2xl'>Recomendet for Today</h1>
-            <div className='flex overflow-auto'>
-                {songsData.map((item,index)=>(<SongIcon key={index} name={item.name} desc={item.desc} id={item._id} image={item.image} />))}
-            </div>
-        </div>
-
-        <div className='mb-4'>
-            <h1 className='my-5 font-bold text-2xl'>Sad hindi songs Mood off 💔</h1>
-            <div className='flex overflow-auto'>
-                {songsData.map((item,index)=>(<SongIcon key={index} name={item.name} desc={item.desc} id={item._id} image={item.image} />))}
-            </div>
-        </div> */}
 
         <div className='mb-4'>
             <h1 className='my-5 font-bold text-2xl'>Popular artists</h1>
@@ -65,6 +39,8 @@ const DisplayHome = () => {
                 ))}
             </div>
         </div>
+
+        <AppDownload />
     </>
   )
 }
