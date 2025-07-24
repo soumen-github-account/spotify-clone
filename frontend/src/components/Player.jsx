@@ -25,7 +25,7 @@ const Player = () => {
             <img onClick={next} className='w-4 cursor-pointer' src={assets.next_icon} alt="" />
             <img className='w-4 cursor-pointer' src={assets.loop_icon} alt="" />
         </div>
-        <div className='flex items-center gap-3 max-sm:hidden'>
+        <div className='flex items-center gap-3'>
             <p>{time.currentTime.minute}:{time.currentTime.second}</p>
               <div ref={seekBg} onClick={seekSong} className='w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer'>
                 <hr ref={seekBar} className='h-1 border-none w-0 bg-green-800 rounded-full' />
