@@ -1,13 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { PlayContext } from '../contexts/PlayerContext'
 const Player = () => {
-  const { seekBar,seekBg,playStatus, play,pause,track,time,previous,next,seekSong } = useContext(PlayContext)
-  return track ? (
+  const { seekBar,seekBg,playStatus, play,pause,track,time,previous,next,seekSong, openSong, setOpenSong } = useContext(PlayContext)
+  const formatTime = (minute, second) =>
+    `${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}`;
+
+  return track && !openSong ? (
     <div className='h-[4rem] bg-black flex fixed bottom-1 left-0 w-full px-2 z-10 items-center'>
       <div className='lg:flex items-center gap-x-4'>
-        <img className='w-12' src={track.image} alt="" />
-        <div className='hidden md:block'>
+        <img onClick={()=>setOpenSong(true)} className='w-12 cursor-pointer' src={track.image} alt="" />
+        <div className='text-white hidden lg:block'>
             <p>{track.name}</p>
             <p>{track.desc.slice(0,12)}</p>
         </div>
@@ -25,12 +28,12 @@ const Player = () => {
             <img onClick={next} className='w-4 cursor-pointer' src={assets.next_icon} alt="" />
             <img className='w-4 cursor-pointer' src={assets.loop_icon} alt="" />
         </div>
-        <div className='flex items-center gap-3'>
-            <p>{time.currentTime.minute}:{time.currentTime.second}</p>
+        <div className='flex items-center gap-3 text-white mt-3'>
+            <p className='max-sm:hidden'>{formatTime(time.currentTime.minute, time.currentTime.second)}</p>
               <div ref={seekBg} onClick={seekSong} className='w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer'>
                 <hr ref={seekBar} className='h-1 border-none w-0 bg-green-800 rounded-full' />
               </div>
-            <p>{time.totalTime.minute}:{time.totalTime.second}</p>
+            <p className='max-sm:hidden'>{formatTime(time.totalTime.minute, time.totalTime.second)}</p>
         </div>
       </div>
       <div className='hidden lg:flex items-center gap-2 opacity-75'>

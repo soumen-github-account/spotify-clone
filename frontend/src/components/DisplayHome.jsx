@@ -7,13 +7,15 @@ import { PlayContext } from '../contexts/PlayerContext'
 import { singerData } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 import AppDownload from './AppDownload'
+import SongFace from './SongFace'
+import { AnimatePresence } from 'framer-motion';
 
 const DisplayHome = () => {
-    const {songsData, albumsData} = useContext(PlayContext)
+    const {songsData, albumsData, openSong, setOpenSong} = useContext(PlayContext)
     const navigate = useNavigate();
     
   return (
-    <>
+    <div className='relative'>
         <Navbar />
         <div className='mb-4'>
             <h1 className='my-5 font-bold text-2xl'>Featured Charts</h1>
@@ -41,7 +43,10 @@ const DisplayHome = () => {
         </div>
 
         <AppDownload />
-    </>
+        <AnimatePresence>
+            {openSong && <SongFace />}
+        </AnimatePresence>  
+    </div>
   )
 }
 
