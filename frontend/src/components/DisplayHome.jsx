@@ -36,7 +36,7 @@ const DisplayHome = () => {
                 {singerData.map((item,index)=>(
                     <div key={index} onClick={()=>{navigate(`/singerAlbum/${item.id}`); scrollTo(0,0)}} className='min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26]'>
                         <img className='rounded-full' src={item.image} alt="" />
-                        <p className='font-bold mt-2 mb-1'>{item.name}</p>
+                        <p className='font-bold mt-2 mb-1 text-center'>{item.name}</p>
                     </div>
                 ))}
             </div>

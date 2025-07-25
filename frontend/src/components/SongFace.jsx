@@ -118,8 +118,8 @@ const SongFace = () => {
       </div>
       <div className='flex flex-col mt-10 px-3'>
         <img src={track.image} className='rounded-3xl w-50 max-sm:w-full' alt="" />
-        <p className='text-[20px] font-medium mt-4'>{track.name}</p>
-        <p className='text-[16px] text-gray-400'>{track.desc}</p>
+        <p className='text-[20px] font-medium mt-4 clip1'>{track.name}</p>
+        <p className='text-[16px] text-gray-400 clip1'>{track.desc}</p>
       </div>
 
     <div className='flex flex-col items-center gap-1 mt-15'>
