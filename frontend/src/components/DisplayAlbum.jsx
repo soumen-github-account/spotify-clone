@@ -12,7 +12,7 @@ const DisplayAlbum = ({album}) => {
 
     useEffect(()=>{
       albumsData.map((item)=>{
-        if(item._id){
+        if(item._id === id){
           setAlbumData(item)
         }
     })

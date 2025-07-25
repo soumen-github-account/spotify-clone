@@ -24,7 +24,7 @@ const DisplayHome = () => {
             </div>
         </div>
 
-        <SongIcon tag="Todey's biggest hits" />
+        <SongIcon tag="Todey's biggest hit" />
         <SongIcon tag="Popular albums and singles" />
         <SongIcon tag="Recomendet for Today" />
         <SongIcon tag="Sad hindi songs Mood off 💔" />
